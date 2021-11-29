@@ -44,12 +44,12 @@ func (a *Api) getVibe(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *Api) listVibes(w http.ResponseWriter, r *http.Request) {
-	screams, err := a.store.ListVibes(r.Context())
+	vibes, err := a.store.ListVibes(r.Context())
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusNotFound, err)
 		return
 	}
-	a.writeResponse(w, http.StatusOK, screams)
+	a.writeResponse(w, http.StatusOK, vibes)
 }
 
 func (a *Api) deleteVibe(w http.ResponseWriter, r *http.Request) {

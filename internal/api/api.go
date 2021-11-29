@@ -29,7 +29,7 @@ func (a *Api) Run() {
 	r.HandleFunc("/health", a.healthHandler).Methods("GET")
 	r.HandleFunc("/vibes", a.addVibe).Methods("POST")
 	r.HandleFunc("/vibes/{vibeId}", a.getVibe).Methods("GET")
-	r.HandleFunc("/vibes", a.listVibes).Methods("GET").Queries("max", "{max:[0-9]+}")
+	r.HandleFunc("/vibes", a.listVibes).Methods("GET")
 	r.HandleFunc("/vibes/{vibeId}", a.deleteVibe).Methods("DELETE")
 
 	serverAddress := fmt.Sprintf(":%s", a.conf.ServerPort)
