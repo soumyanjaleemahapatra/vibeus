@@ -27,10 +27,10 @@ func (a *Api) Run() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/health", a.healthHandler).Methods("GET")
-	r.HandleFunc("/screams/", a.addScream).Methods("POST")
-	r.HandleFunc("/screams/{screamId}", a.getScream).Methods("GET")
-	r.HandleFunc("/screams", a.listScreams).Methods("GET").Queries("max", "{max:[0-9]+}")
-	r.HandleFunc("/screams/{screamId}", a.deleteScream).Methods("DELETE")
+	r.HandleFunc("/vibes/", a.addVibe).Methods("POST")
+	r.HandleFunc("/vibes/{vibeId}", a.getVibe).Methods("GET")
+	r.HandleFunc("/vibes", a.listVibes).Methods("GET").Queries("max", "{max:[0-9]+}")
+	r.HandleFunc("/vibes/{vibeId}", a.deleteVibe).Methods("DELETE")
 
 	serverAddress := fmt.Sprintf(":%s", a.conf.ServerPort)
 	log.Infof("server started on address %s", serverAddress)

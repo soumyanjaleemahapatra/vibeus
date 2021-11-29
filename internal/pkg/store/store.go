@@ -2,12 +2,12 @@ package store
 
 import (
 	"context"
-	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/scream"
+	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/vibe"
 )
 
 type Store interface {
-	CreateScream(ctx context.Context, scream *scream.Scream) error
-	GetScream(ctx context.Context, id string) (*scream.Scream, error)
-	ListScreams(ctx context.Context) ([]*scream.Scream, error)
-	DeleteScream(ctx context.Context, id string) error
+	CreateVibe(ctx context.Context, scream *vibe.Vibe) error
+	GetVibe(ctx context.Context, id string) (*vibe.Vibe, error)
+	ListVibes(ctx context.Context) ([]*vibe.Vibe, error)
+	DeleteVibe(ctx context.Context, id string) error
 }

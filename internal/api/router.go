@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
-	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/scream"
+	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/vibe"
 	"net/http"
 )
 
@@ -13,8 +13,8 @@ func (a *Api) healthHandler(w http.ResponseWriter, r *http.Request) {
 	a.writeSimpleResponse(w, http.StatusOK)
 }
 
-func (a *Api) addScream(w http.ResponseWriter, r *http.Request) {
-	var sc *scream.Scream
+func (a *Api) addVibe(w http.ResponseWriter, r *http.Request) {
+	var sc *vibe.Vibe
 
 	err := json.NewDecoder(r.Body).Decode(&sc)
 	if err != nil {
@@ -22,7 +22,7 @@ func (a *Api) addScream(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = a.store.CreateScream(r.Context(), sc)
+	err = a.store.CreateVibe(r.Context(), sc)
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusInternalServerError, err)
 		return
@@ -31,10 +31,10 @@ func (a *Api) addScream(w http.ResponseWriter, r *http.Request) {
 	a.writeSimpleResponse(w, http.StatusOK)
 }
 
-func (a *Api) getScream(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["screamId"]
+func (a *Api) getVibe(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["vibeId"]
 
-	scream, err := a.store.GetScream(r.Context(), id)
+	scream, err := a.store.GetVibe(r.Context(), id)
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusNotFound, err)
 		return
@@ -43,8 +43,8 @@ func (a *Api) getScream(w http.ResponseWriter, r *http.Request) {
 	a.writeResponse(w, http.StatusOK, scream)
 }
 
-func (a *Api) listScreams(w http.ResponseWriter, r *http.Request) {
-	screams, err := a.store.ListScreams(r.Context())
+func (a *Api) listVibes(w http.ResponseWriter, r *http.Request) {
+	screams, err := a.store.ListVibes(r.Context())
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusNotFound, err)
 		return
@@ -52,10 +52,10 @@ func (a *Api) listScreams(w http.ResponseWriter, r *http.Request) {
 	a.writeResponse(w, http.StatusOK, screams)
 }
 
-func (a *Api) deleteScream(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["screamId"]
+func (a *Api) deleteVibe(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["vibeId"]
 
-	err := a.store.DeleteScream(r.Context(), id)
+	err := a.store.DeleteVibe(r.Context(), id)
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusNotFound, err)
 		return
