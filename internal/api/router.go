@@ -14,15 +14,15 @@ func (a *Api) healthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *Api) addVibe(w http.ResponseWriter, r *http.Request) {
-	var sc *vibe.Vibe
+	var vb *vibe.Vibe
 
-	err := json.NewDecoder(r.Body).Decode(&sc)
+	err := json.NewDecoder(r.Body).Decode(&vb)
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusBadRequest, err)
 		return
 	}
 
-	err = a.store.CreateVibe(r.Context(), sc)
+	err = a.store.CreateVibe(r.Context(), vb)
 	if err != nil {
 		a.writeFailedResponse(w, http.StatusInternalServerError, err)
 		return
