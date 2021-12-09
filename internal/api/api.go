@@ -3,11 +3,12 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
 	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/config"
 	"github.com/soumyanjaleemahapatra/vibeus/internal/pkg/store"
-	"net/http"
 )
 
 type Api struct {
@@ -44,6 +45,7 @@ func (a *Api) writeResponse(w http.ResponseWriter, status int, data interface{})
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(status)
 	w.Write(resp)
 }
